@@ -24,14 +24,13 @@ module.exports = function (grunt) {
 		filesize: {
 			test: {
 				src: [
-					'test/files3/**/*.*',
 					'test/files/**/*.*',
 					'test/files2/**/*.*'
 				],
 				options: {
 					// Setup the limits for found files in the path.
 					limits: {
-						'test/files3/five_mb.js': 5000
+						'test/files/five_mb.js': 5000
 					},
 					onlyOnMaxSize: true,
 					output: [

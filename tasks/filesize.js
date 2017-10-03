@@ -177,7 +177,7 @@ module.exports = function (grunt) {
 		}).map(function (file) {
 			var stat = fs.statSync(file);
 			var kb = (stat.size / 1024);
-			var threshold = NaN;
+			var threshold = false;
 
 			var size = options.limits[file];
 
@@ -187,7 +187,7 @@ module.exports = function (grunt) {
 
 			if (options.onlyOnMaxSize) {
 
-				debug('file: %s | Size: %s | threshold: %s | Limit: %', file, size, threshold);
+				debug('file: %s | Size: %s | threshold: %s', file, size, threshold);
 
 				if (threshold) {
 					return {

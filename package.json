@@ -24,8 +24,8 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "create:test:data": "mkfile -nv 5m five_mb.js",
-    "test": "grunt test"
+    "create:test:data": "mkfile -nv 5m ./test/files/five_mb.js",
+    "test": "DEBUG=* grunt filesize"
   },
   "devDependencies": {
     "debug": "^3.1.0",
