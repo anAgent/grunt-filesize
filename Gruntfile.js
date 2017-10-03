@@ -8,48 +8,57 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
-    jshint: {
-      all: [
-        'Gruntfile.js',
-        'tasks/*.js'
-      ],
-      options: {
-        jshintrc: '.jshintrc'
-      }
-    },
-    filesize: {
-      test: {
-        src: ["test/files/**/*.*", "test/files2/**/*.*"],
-        options: {
-          output: [
-            {
-              stdout: true
-            },
-            {
-              path: "test/result/overwirte.txt",
-              format: "{fullpath} {filename} {basename} {now:YYYY/MM/DD HH:mm:ss} {size}"
-            },
-            {
-              path: "test/result/append.txt",
-              format: "{fullpath} {filename} {basename} {now:YYYY/MM/DD HH:mm:ss} {size}",
-              append: true
-            },
-            {
-              path: "test/result/{now:DDMMMYYYY}.csv",
-              format: "{filename},{size}"
-            }
-          ]
-        }
-      }
-    }
-  });
+	// Project configuration.
+	grunt.initConfig({
+		jshint: {
+			all: [
+				'Gruntfile.js',
+				'tasks/*.js'
+			],
+			options: {
+				jshintrc: '.jshintrc'
+			}
+		},
+		filesize: {
+			test: {
+				src: [
+					'test/files3/**/*.*',
+					'test/files/**/*.*',
+					'test/files2/**/*.*'
+				],
+				options: {
+					// Setup the limits for found files in the path.
+					limits: {
+						'test/files3/five_mb.js': 5000
+					},
+					onlyOnMaxSize: true,
+					output: [
+						{
+							stdout: true
+						},
+						{
+							path: 'test/result/overwirte.txt',
+							format: '{error} {fullpath} {filename} {basename} {now:YYYY/MM/DD HH:mm:ss} {size}'
+						},
+						{
+							path: 'test/result/append.txt',
+							format: '{error} {fullpath} {filename} {basename} {now:YYYY/MM/DD HH:mm:ss} {size}',
+							append: true
+						},
+						{
+							path: 'test/result/{now:DDMMMYYYY}.csv',
+							format: '{error} {filename},{size}'
+						}
+					]
+				}
+			}
+		}
+	});
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadTasks('tasks');
+	// These plugins provide necessary tasks.
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadTasks('tasks');
 
 };
